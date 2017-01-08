@@ -12,6 +12,7 @@ function sunset_add_admin_page(){
 	//Generate Sunset Admin Sub Pages
 	add_submenu_page( 'alecadd_sunset', 'Sunset Sidebar Options', 'Sidebar', 'manage_options', 'alecadd_sunset', 'sunset_theme_create_page' );
 	add_submenu_page( 'alecadd_sunset', 'Sunset Theme Options', 'Theme Options', 'manage_options', 'alecadd_sunset_theme', 'sunset_theme_support_page' );
+	add_submenu_page( 'alecadd_sunset', 'Sunset Contact Form', 'Contact Form', 'manage_options', 'alecadd_sunset_theme_contact', 'sunset_contact_form_page' );
 	add_submenu_page( 'alecadd_sunset', 'Sunset CSS Options', 'Custom CSS', 'manage_options', 'alecadd_sunset_css', 'sunset_theme_settings_page' );	
 	
 	//Activate custom settings
@@ -56,6 +57,51 @@ function sunset_custom_settings(){
 	add_settings_field('custom-header', 'Custom Header', 'sunset_custom_header', 'alecadd_sunset_theme', 'sunset-theme-options' );
 	add_settings_field('custom-background', 'Custom Background', 'sunset_custom_background', 'alecadd_sunset_theme', 'sunset-theme-options' );
 
+	//*********************
+	//Contact Form Options
+	//*********************
+
+	register_setting( 'sunset-contact-options', 'activate_contact' );
+	add_settings_section( 'sunset-contact-section', 'Contact Form', 'sunset_contact_section','alecadd_sunset_theme_contact' );
+	add_settings_field( 'activate-form', 'Activate Contact Form', 'sunset_activate_contact', 'alecadd_sunset_theme_contact', 'sunset-contact-section' );
+
+	//*********************
+	//Custom CSS Options
+	//*********************
+	register_setting( 'sunset-custom-css-options', 'sunset_css', 'sunset_sanitize_custom_css' );
+	add_settings_section( 'sunset-custom-css-section', 'Custom CSS', 'sunset_custom_css_section_callback', 'alecadd_sunset_css' );
+	add_settings_field( 'custom-css', 'Insert your Custom CSS', 'sunset_custon_css_calllback', 'alecadd_sunset_css', 'sunset-custom-css-section');
+
+}
+
+//Contact CSS Callback Function
+
+function sunset_custom_css_section_callback(){
+	echo 'Customize Sunset Theme with your own CSS';
+}
+function sunset_custon_css_calllback(){
+	$css = get_option('sunset_css');
+	$css = ( empty($css) ? '/* Sunset Theme Custom CSS */' : $css); 
+	echo '<div id="customCss">'.$css.'</div>
+			<textarea id="sunset_css" name="sunset_css" style="display:none; visibility:hidden;">'.$css.'</textarea>';
+}
+
+
+//Contact Form Callback Function
+
+function sunset_contact_section(){
+	echo 'Activate and Deactivate the Built-in Contact Form';
+}
+
+function sunset_activate_contact(){
+	$options = get_option('activate_contact');
+	$checked = ( @$options == 1 ? 'checked' : '');
+	echo '<label><input type="checkbox" id="activate_contact" name="activate_contact" value="1" '.$checked.'></label>';
+}
+
+function sunset_sanitize_custom_css($input){
+	$output = esc_textarea( $input );
+	return $output;
 }
 
 //Post Formats Callback Function
@@ -86,6 +132,8 @@ function sunset_custom_background(){
 	echo '<label><input type="checkbox" id="custom_background" name="custom_background" value="1" '.$checked.'>Activate the Custom Background</label>';
 }
 
+
+
 // Sidebar Options Functions
 function sunset_sidebar_options(){
 	echo 'Customize your Sidebar Information';
@@ -112,14 +160,14 @@ function sunset_sidebar_name(){
 }
 function sunset_sidebar_description(){
 	$description = esc_attr(get_option('user_description'));
-	echo '<input type="text" name="user_description" value="'.$description.'" placeholder="Description" />';
-	echo '<p class="description">Write something smart"</p>';
+	echo '<input type="text" name="user_description" value="'.$description.'" placeholder="Description" />
+			<p class="description">Write something smart"</p>';
 }
 
 function sunset_sidebar_twitter(){
 	$twitter = esc_attr(get_option('twitter_handler'));
-	echo '<input type="text" name="twitter_handler" value="'.$twitter.'" placeholder="Twitter handler" />';
-	echo '<p class="description">Input your Twitter username without @ character</p>';
+	echo '<input type="text" name="twitter_handler" value="'.$twitter.'" placeholder="Twitter handler" />
+			<p class="description">Input your Twitter username without @ character</p>';
 }
 function sunset_sidebar_facebook(){
 	$facebook = esc_attr(get_option('facebook_handler'));
@@ -145,7 +193,10 @@ function sunset_theme_create_page(){
 function sunset_theme_support_page(){
 	require_once ( get_template_directory() . '/inc/templates/sunset-theme-support.php');
 }
+function sunset_contact_form_page(){
+	require_once ( get_template_directory() . '/inc/templates/sunset-contact-form.php');
+}
 
 function sunset_theme_settings_page(){
-
+	require_once ( get_template_directory() . '/inc/templates/sunset-custom-css.php');
 }

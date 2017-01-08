@@ -16,9 +16,7 @@
 		</div>
 		<h1 class="sunset-username"><?php print $fullName; ?></h1>
 		<h2 class="sunset-description"><?php print $description; ?></h2>
-		<div class="icons-wrapper">
-			
-		</div>
+		<div class="icons-wrapper"></div>
 	</div>
 </div>
 
