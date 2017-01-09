@@ -85,6 +85,10 @@ function sunset_custon_css_calllback(){
 	echo '<div id="customCss">'.$css.'</div>
 			<textarea id="sunset_css" name="sunset_css" style="display:none; visibility:hidden;">'.$css.'</textarea>';
 }
+function sunset_sanitize_custom_css($input){
+	$output = esc_textarea( $input );
+	return $output;
+}
 
 
 //Contact Form Callback Function
@@ -97,11 +101,6 @@ function sunset_activate_contact(){
 	$options = get_option('activate_contact');
 	$checked = ( @$options == 1 ? 'checked' : '');
 	echo '<label><input type="checkbox" id="activate_contact" name="activate_contact" value="1" '.$checked.'></label>';
-}
-
-function sunset_sanitize_custom_css($input){
-	$output = esc_textarea( $input );
-	return $output;
 }
 
 //Post Formats Callback Function
@@ -193,6 +192,7 @@ function sunset_theme_create_page(){
 function sunset_theme_support_page(){
 	require_once ( get_template_directory() . '/inc/templates/sunset-theme-support.php');
 }
+
 function sunset_contact_form_page(){
 	require_once ( get_template_directory() . '/inc/templates/sunset-contact-form.php');
 }
