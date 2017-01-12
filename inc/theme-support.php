@@ -85,3 +85,39 @@ function sunset_posted_footer(){
 				</div>
 			</div>';
 }
+
+function sunset_get_attachment(){
+
+	$output = '';
+	if( has_post_thumbnail() ): 
+		$output = wp_get_attachment_url( get_post_thumbnail_id( get_the_ID() ) );
+	else:
+		$attachments = get_posts(array(
+			'post_type' => 'attachment',
+			'post_per_page' => 1,
+			'post_parent' => get_the_ID()
+		));
+		if( $attachments ):
+			foreach ($attachments as $attachment):
+				$output = wp_get_attachment_url($attachment->ID);
+			endforeach;
+		endif;
+
+		wp_reset_postdata();
+
+	endif;
+	return $output;
+}
+
+function sunset_get_embedded_media( $type = array() ){
+	$content = do_shortcode(apply_filters('the_content', get_the_content()));
+	$embed = get_media_embedded_in_content( $content, $type);
+
+	if( in_array('audio', $type) ) :
+		$output = str_replace('visual=true', 'visual=false' ,$embed[0]);
+	else:
+		$output = $embed[0];
+	endif;
+
+	return $output;
+}
