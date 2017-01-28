@@ -9,6 +9,7 @@
 @import 'base/variables';
 @import 'base/fonticon';
 @import 'base/placeholders';
+@import 'base/wordpress';
 
 /*
 	Generic
@@ -437,4 +438,44 @@ h2{ font-size: 48px; font-weight: 200; color: $primary-color;
   animation-duration: 1000ms;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
+}
+
+/*
+  SINGLE
+  ----------------------------------------------------
+*/
+
+.entry-content{
+  margin-top: 40px;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  font-weight: 300;
+  line-height: 1.7em;
+  a,
+  .sunset-tooltip,
+  .sunset-popover{
+    color: #ff9d1d;
+    cursor: pointer;
+    &:hover,
+    &:focus{
+      color: #F56B08;
+    }
+  }
+  p{
+    margin-bottom: 15px;
+  }
+  b, strong{
+    font-weight: 500;
+  }
+
+}
+.post-link-nav{
+  padding: 10px 0;
+  a{
+    padding:  0 5px;
+    &:hover,
+    &:focus{
+      color: #ff9d1d;
+    }
+  }
 }
