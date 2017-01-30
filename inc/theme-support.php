@@ -37,6 +37,30 @@ function sunset_register_nav_menu(){
 }
 add_action('after_setup_theme', 'sunset_register_nav_menu');
 
+
+// activate HTML5 features
+
+add_theme_support('html5',array('comment-list', 'comment-form', 'search-form', 'gallery'));
+
+/**********************************************
+SIDEBAR FUNCTIONS
+*********************************************/
+
+function sunset_sidebar_init(){
+	register_sidebar(array(
+		'name' 			=> esc_html__('Sunset Sidebar', 'sunsettheme'),
+		'id'   			=> 'sunset-sidebar',
+		'description'  => 'Standart Sidebar',
+		'before_widget'=> '<aside id="%1$s" class="sunset-widget %2$s">',
+		'after_widget' => '</aside>',
+		'before_title' => '<h4 class="sunset-widget-title">',
+		'after_title'  => '</h4>'
+		)
+	);
+
+}
+add_action('widgets_init', 'sunset_sidebar_init');
+
 /**********************************************
 BLOG LOOP CUSTOM FUNCTION
 *********************************************/
@@ -184,3 +208,47 @@ function sunset_post_navigation(){
 	return $nav;
 
 }
+
+function sunset_comments_navigation(){
+
+	//if(get_comment_pages_count() > 1 && get_option( 'page_comments' ) ): 
+
+		require ( get_template_directory() . '/inc/templates/sunset-comment-nav.php');
+
+	//endif;
+
+}
+
+
+/**********************************************
+	SOCIAL SHARE
+*********************************************/
+
+function sunset_share_this( $content ){
+
+	if( is_single() ){
+
+		$content .= '<div class="sunset-shareThis"><h4>Share this</h4>';
+		
+			$title = get_the_title();
+			$permalink = get_permalink();
+
+			$twitterHandler = ( get_option('twitter_handler') ? '&amp;via=' .esc_attr(get_option('twitter_handler')) : '' ) ;
+			$twitter = 'https://twitter.com/intent/tweet?text=' . $title . '&amp;url=' . $permalink . $twitterHandler .'';
+			$facebook = 'https://www.facebook.com/sharer/sharer.php?u=' . $permalink;
+			$google = 'https://plus.google.com/share?url=' . $permalink;
+
+		$content .= '<ul>';
+		$content .= '<li><a href="' . $twitter  .'" target="_blank" rel="nofollow" class="fa fa-twitter"></a></li>';
+		$content .=	'<li><a href="' . $facebook . '" target="_blank" rel="nofollow" class="fa fa-facebook"></a></li>';
+		$content .=	'<li><a href="' . $google . '" target="_blank" rel="nofollow" class="fa fa-google-plus"></a></li>';
+		$content .=	'</ul></div>';
+
+		return $content;
+	}else{
+
+		return $content;
+
+	}
+}
+add_filter( 'the_content', 'sunset_share_this' );
