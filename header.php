@@ -30,7 +30,6 @@
 </head>
 
 <body <?php body_class(); ?>>
-	
 	<div class="sunset-sidebar sidebar-closed">
 		<div class="sunset-sidebar-container">
 			<a class="js-toggleSidebar sidebar-close">
@@ -42,6 +41,8 @@
 
 		</div>
 	</div>
+
+	<div class="sidebar-overlay js-toggleSidebar"></div>
 
 	<div class="container-fluid">
 		<div class="row">

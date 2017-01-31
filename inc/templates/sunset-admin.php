@@ -7,6 +7,10 @@
 	$lastName = esc_attr(get_option('last_name'));
 	$fullName = $firstName . ' ' . $lastName;
 	$description = esc_attr(get_option('user_description'));
+
+	$twitter_icon = esc_attr(get_option('twitter_handler'));
+	$facebook_icon = esc_attr(get_option('facebook_handler'));
+	$gplus_icon = esc_attr(get_option('gplus_handler'));
 ?>
 
 <div class="sunset-sidebar-preview">
@@ -16,11 +20,21 @@
 		</div>
 		<h1 class="sunset-username"><?php print $fullName; ?></h1>
 		<h2 class="sunset-description"><?php print $description; ?></h2>
-		<div class="icons-wrapper"></div>
+		<div class="icons-wrapper">
+			<?php if( !empty ($twitter_icon)) : ?>	
+				<span class="sunset-icon-sidebar fa fa-twitter"></span>			
+			<?php endif; ?>
+			<?php if( !empty ($gplus_icon)) : ?>
+				<span class="sunset-icon-sidebar fa fa-google-plus"></span>
+			<?php endif; ?>
+			<?php if( !empty ($facebook_icon)) : ?>
+				<span class="sunset-icon-sidebar fa fa-facebook"></span>
+			<?php endif; ?>
+		</div>
 	</div>
 </div>
 
-<form action="options.php" method="post" class="sunset-general-form">
+<form id="submitForm" action="options.php" method="post" class="sunset-general-form">
 	<?php settings_fields('sunset-settings-group'); ?>
 	<?php  do_settings_sections('alecadd_sunset'); ?>
 	<?php submit_button('Save Changes', 'primary', 'btnSubmit'); ?>

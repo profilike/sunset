@@ -17,6 +17,9 @@
 */
 body{
 	font-family: $body-font;
+  &.no-scroll{
+    overflow-y: hidden;
+  }
 }
 a{
   color: $primary-color;@include animate(color, 320ms);
@@ -530,6 +533,18 @@ h2{ font-size: 48px; font-weight: 200; color: $primary-color;
   Sidebar section
   ----------------------------------------------------
 */
+.sidebar-overlay{
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  position: fixed;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+  cursor: e-resize;
+}
+
 .sunset-sidebar{
   position: fixed;
   top: 0;
@@ -546,6 +561,13 @@ h2{ font-size: 48px; font-weight: 200; color: $primary-color;
   &.sidebar-closed{
     @include transform( translateX(100%) );
   }
+  a{
+    color: #bababa;
+    &:hover,
+    &:focus{
+      color: white;
+    }
+  }
 }
 .sunset-sidebar-container{
   position: relative;
@@ -553,7 +575,18 @@ h2{ font-size: 48px; font-weight: 200; color: $primary-color;
   height: 100vh;
   display: block;
   padding-top: 40px;
+
 }
+.sidebar-scroll{
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+   overflow-y: scroll;
+}
+
+
 .sidebar-close,
 .sidebar-open{
   position: absolute;
@@ -571,4 +604,148 @@ h2{ font-size: 48px; font-weight: 200; color: $primary-color;
   right: 20px;
   top: 20px;
   font-size: 10px;
+}
+
+/* Admin declared classes */
+
+h1.sunset-username,
+h2.sunset-description{
+  font-weight: 100;
+  color: #fff;
+}
+h1.sunset-username{
+  font-size: 24px;
+  margin: 0 0 10px;
+}
+h2.sunset-description{
+  font-size: 13px;
+  margin: 0 0 20px;
+}
+.image-container{
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+}
+.profile-picture{
+  width: 122px;
+  height: 122px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 20px auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  background-size: cover;
+
+}
+.icons-wrapper a{
+  color: white;
+}
+
+/*
+  Widgets section
+  ----------------------------------------------------
+*/
+.sunset-widget {
+  margin: 30px 0 50px;
+  padding: 0 20px;
+  letter-spacing: 0.2px;
+  
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  li {
+    padding: 0 10px;
+    margin-bottom: 10px;
+    
+    a {
+      //font-size: 15px;
+    }
+    
+  }
+  
+}
+.sunset-widget-title{
+  display: block;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 300;
+  padding: 8px;
+  background-color: #303030;
+  border-radius: 20px;
+  line-height: 1em;
+  margin-bottom: 20px;
+  letter-spacing: 0.2px;
+}
+// Tags Cloud Widget
+.tagcloud{
+  text-align: center;
+  a{
+    display: inline-block;
+    background-color: #7d7d7d;
+    border-radius: 10px;
+    padding: 1px 20px;
+    color: #eee;
+  }
+}
+// Categories Widget
+.cat-item {
+  position: relative;
+  
+  a,
+  span {
+    display: block;
+  }
+  
+  a {
+    padding: 4px 0;
+  }
+  
+  span {
+    position: absolute;
+    right: 0;
+    top: 2px;
+    width: 22px;
+    height: 22px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 22px;
+    background-color: #7D7D7D;
+    border-radius: 10px;
+
+  }
+  
+}
+
+// Comments Widget
+.recentcomments {
+  
+  font-size: 10px;
+  color: #ccc;
+  
+  a {
+    text-transform: uppercase;
+  }
+  
+  span {
+    
+    &, 
+    & a {
+    
+      display: block;
+      color: #fff;
+      font-size: 14px;
+      padding-bottom: 4px;
+      margin-bottom: 2px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      text-transform: none;
+    
+    }
+  }
+  
 }

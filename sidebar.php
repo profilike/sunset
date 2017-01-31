@@ -10,7 +10,7 @@
 
 ?>
 
-<aside id="secondery" class="wodget_area" rol="complementary">
+<aside id="secondery" class="widget_area" rol="complementary">
 	
 	<?php dynamic_sidebar( 'sunset-sidebar' ); ?>
 
