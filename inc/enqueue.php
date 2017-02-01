@@ -16,9 +16,9 @@ function  sunset_load_admin_scripts( $hook ){
 	
 	$pages_array = array(
 		'toplevel_page_alecadd_sunset',
-		'sunset_page_alecaddd_sunset_theme',
-		'sunset_page_alecaddd_sunset_theme_contact',
-		'sunset_page_alecaddd_sunset_css'
+		'sunset_page_alecadd_sunset_theme',
+		'sunset_page_alecadd_sunset_theme_contact',
+		'sunset_page_alecadd_sunset_css'
 	);
 
 	//PHP 7
@@ -43,7 +43,7 @@ function  sunset_load_admin_scripts( $hook ){
 		wp_enqueue_style( 'ace', get_template_directory_uri() . '/css/sunset.ace.css', array(), '1.0.0', 'all' );
 		
 		wp_enqueue_script( 'ace', get_template_directory_uri() . '/js/ace/ace.js', array('jquery'), '1.2.1', true );
-		wp_enqueue_script( 'sunset-custom-css-script', get_template_directory_uri() . '/js/sunset.custom_css.js', array('jquery'), '1.0.0', true );
+		wp_enqueue_script( 'sunset-custom-css-script', get_template_directory_uri() . '/js/sunset.custom-css.js', array('jquery'), '1.0.0', true );
 	
 	}
 	
